@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.pedroferezin.recheiofacil.databinding.FragmentCadastroSaborBinding
 import br.com.pedroferezin.recheiofacil.domain.SaborPastel
-import br.com.pedroferezin.recheiofacil.viewmodel.CadastroState
 import br.com.pedroferezin.recheiofacil.viewmodel.SaborPastelViewModel
+import br.com.pedroferezin.recheiofacil.viewmodel.states.CadastroState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -31,6 +31,17 @@ class CadastroSaborFragment : Fragment() {
         return binding.root
     }
 
+    private fun validarCampos(): Boolean = with(binding.saboresFieldsLayout) {
+        val campos = listOf(editTextNome, editTextDescricao, editTextPreco)
+        val invalido = campos.firstOrNull { it.text.isNullOrBlank() }?.apply {
+            error = "Campo obrigatório"
+            requestFocus()
+            Snackbar.make(binding.root, "Preencha todos os campos.", Snackbar.LENGTH_LONG).show()
+        }
+        campos.filterNot { it == invalido }.forEach { it.error = null }
+        invalido == null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,7 +52,7 @@ class CadastroSaborFragment : Fragment() {
                         binding.root,
                         "Sabor de pastel inserido com sucesso!",
                         Snackbar.LENGTH_SHORT
-                    )
+                    ).show()
 
                     CadastroState.Loading -> {}
                 }
@@ -49,15 +60,18 @@ class CadastroSaborFragment : Fragment() {
         }
 
         binding.buttonSalvar.setOnClickListener {
-            val saborPastel = SaborPastel(
-                nome = binding.saboresFieldsLayout.editTextNome.text.toString(),
-                descricao = binding.saboresFieldsLayout.editTextDescricao.text.toString(),
-                preco = binding.saboresFieldsLayout.editTextPreco.text.toString().toDouble(),
-                disponivel = binding.saboresFieldsLayout.checkboxDisponivel.isChecked
-            )
-
-            viewModel.salvarSabor(saborPastel);
-            findNavController().navigateUp()
+            if (validarCampos()) {
+                with(binding.saboresFieldsLayout) {
+                    val saborPastel = SaborPastel(
+                        nome = editTextNome.text.toString(),
+                        descricao = editTextDescricao.text.toString(),
+                        preco = editTextPreco.text.toString().toDouble(),
+                        disponivel = checkboxDisponivel.isChecked
+                    )
+                    viewModel.insert(saborPastel)
+                    findNavController().navigateUp()
+                }
+            }
         }
     }
 }
