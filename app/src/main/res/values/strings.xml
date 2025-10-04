@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Recheio Facil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_list">Lista de sabores vazia</string>
+    <string name="nome">Nome</string>
+    <string name="descricao">Descrição</string>
+    <string name="preco">Preço</string>
+    <string name="disponivel">Disponível</string>
+    <string name="salvar">Salvar</string>
+    <string name="sabores_de_pastel">Sabores de pastel</string>
+    <string name="novo_sabor_de_pastel">Novo sabor de pastel</string>
 </resources>

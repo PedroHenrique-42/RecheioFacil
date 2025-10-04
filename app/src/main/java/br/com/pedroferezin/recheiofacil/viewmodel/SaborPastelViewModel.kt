@@ -22,7 +22,7 @@ class SaborPastelViewModel(private val repository: SaborPastelRepository) : View
     private val _stateCadastro = MutableStateFlow<CadastroState>(CadastroState.Loading)
     val stateCadastro = _stateCadastro.asStateFlow()
 
-    fun insert(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
+    fun salvarSabor(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(saborPastel)
         _stateCadastro.value = CadastroState.Success
     }
