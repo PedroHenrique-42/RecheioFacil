@@ -44,24 +44,41 @@ class EdicaoSaborFragment : Fragment() {
         invalido == null
     }
 
+    private fun fillFields(saborPastel: SaborPastel) {
+        binding.saboresFieldsLayout.apply {
+            editTextNome.setText(saborPastel.nome)
+            editTextDescricao.setText(saborPastel.descricao)
+            editTextPreco.setText(saborPastel.preco.toString())
+            checkboxDisponivel.isChecked = saborPastel.disponivel
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val idSaborPastel = requireArguments().getInt("idSaborPastel")
         viewModel.getSabor(idSaborPastel)
 
+        binding.buttonEditar.setOnClickListener {
+            if (validarCampos()) {
+                with(binding.saboresFieldsLayout) {
+                    viewModel.update(
+                        SaborPastel(
+                            id = idSaborPastel,
+                            nome = editTextNome.text.toString(),
+                            descricao = editTextDescricao.text.toString(),
+                            preco = editTextPreco.text.toString().toDouble(),
+                            disponivel = checkboxDisponivel.isChecked
+                        )
+                    )
+                }
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.stateBuscarSabor.collect {
                 when (it) {
-                    is Success -> {
-                        binding.apply {
-                            saboresFieldsLayout.editTextNome.setText(it.sabor.nome)
-                            saboresFieldsLayout.editTextDescricao.setText(it.sabor.descricao)
-                            saboresFieldsLayout.editTextPreco.setText(it.sabor.preco.toString())
-                            saboresFieldsLayout.checkboxDisponivel.isChecked = it.sabor.disponivel
-                        }
-                    }
-
+                    is Success -> fillFields(it.sabor)
                     Loading -> {}
                 }
             }
@@ -83,22 +100,6 @@ class EdicaoSaborFragment : Fragment() {
                 }
             }
         }
-
-        binding.buttonEditar.setOnClickListener {
-            if (validarCampos()) {
-                with(binding.saboresFieldsLayout) {
-                    val saborPastel = SaborPastel(
-                        id = idSaborPastel,
-                        nome = editTextNome.text.toString(),
-                        descricao = editTextDescricao.text.toString(),
-                        preco = editTextPreco.text.toString().toDouble(),
-                        disponivel = checkboxDisponivel.isChecked
-                    )
-                    viewModel.update(saborPastel)
-                }
-            }
-        }
-
     }
 
 }

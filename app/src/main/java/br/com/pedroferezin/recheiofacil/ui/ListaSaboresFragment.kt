@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -63,20 +62,19 @@ class ListaSaboresFragment : Fragment(), OnSaborPastelClickListener {
         viewModel.getAllSabores()
     }
 
-    override fun onSaborPastelClick(id: Int) {
-        Toast.makeText(this.context, "Clicando ${id}", Toast.LENGTH_SHORT).show()
-    }
+    override fun onSaborPastelClick(id: Int) = findNavController().navigate(
+        R.id.action_listaSaboresFragment_to_visualizacaoSaborFragment,
+        Bundle().apply { putInt("idSaborPastel", id) }
+    )
+
 
     override fun onDeleteSaborPastel(saborPastel: SaborPastel) {
         viewModel.delete(saborPastel)
     }
 
-    override fun onEditSaborPastel(id: Int) {
-        val bundle = Bundle()
-        bundle.putInt("idSaborPastel", id)
-        findNavController().navigate(
-            R.id.action_listaSaboresFragment_to_edicaoSaborFragment,
-            bundle
-        )
-    }
+    override fun onEditSaborPastel(id: Int) = findNavController().navigate(
+        R.id.action_listaSaboresFragment_to_edicaoSaborFragment,
+        Bundle().apply { putInt("idSaborPastel", id) }
+    )
+
 }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,17 +10,10 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.CadastroSaborFragment">
+        tools:context=".ui.VisualizacaoSaborFragment">
 
         <include
             android:id="@+id/saboresFieldsLayout"
             layout="@layout/sabores_fields_layout" />
-
-        <Button
-            android:id="@+id/buttonSalvar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/salvar" />
     </LinearLayout>
 </ScrollView>

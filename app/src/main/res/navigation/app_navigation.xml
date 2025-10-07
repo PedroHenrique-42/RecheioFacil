@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_listaSaboresFragment_to_edicaoSaborFragment"
             app:destination="@id/edicaoSaborFragment" />
+        <action
+            android:id="@+id/action_listaSaboresFragment_to_visualizacaoSaborFragment"
+            app:destination="@id/visualizacaoSaborFragment" />
     </fragment>
     <fragment
         android:id="@+id/cadastroSaborFragment"
@@ -27,4 +30,9 @@
         android:name="br.com.pedroferezin.recheiofacil.ui.EdicaoSaborFragment"
         android:label="@string/editar_sabor_de_pastel"
         tools:layout="@layout/fragment_edicao_sabor" />
+    <fragment
+        android:id="@+id/visualizacaoSaborFragment"
+        android:name="br.com.pedroferezin.recheiofacil.ui.VisualizacaoSaborFragment"
+        android:label="Visualizar sabor de pastel"
+        tools:layout="@layout/fragment_visualizacao_sabor" />
 </navigation>

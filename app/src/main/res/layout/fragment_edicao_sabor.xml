@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.CadastroSaborFragment">
+        tools:context=".ui.EdicaoSaborFragment">
 
         <include
             android:id="@+id/saboresFieldsLayout"
