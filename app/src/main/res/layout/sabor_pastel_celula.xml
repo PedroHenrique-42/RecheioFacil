@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nome"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -29,16 +30,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/descricao"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nome" />
 
+        <TextView
+            android:id="@+id/disponivel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/preco" />
+
         <ImageButton
             android:id="@+id/iconExcluir"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="10dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/excluir"
+            android:scaleType="fitCenter"
+
             android:src="@drawable/delete_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iconEditar"
@@ -47,10 +60,11 @@
 
         <ImageButton
             android:id="@+id/iconEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/excluir"
+            android:scaleType="fitCenter"
             android:src="@drawable/edit_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

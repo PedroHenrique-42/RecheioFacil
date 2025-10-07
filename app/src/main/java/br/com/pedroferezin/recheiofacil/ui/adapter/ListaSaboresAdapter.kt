@@ -3,9 +3,11 @@ package br.com.pedroferezin.recheiofacil.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import br.com.pedroferezin.recheiofacil.R
 import br.com.pedroferezin.recheiofacil.databinding.SaborPastelCelulaBinding
 import br.com.pedroferezin.recheiofacil.domain.SaborPastel
 
@@ -19,6 +21,7 @@ class ListaSaboresAdapter(
         RecyclerView.ViewHolder(viewBinding.root) {
         val nameTextView: TextView = viewBinding.nome
         val precoTextView: TextView = viewBinding.preco
+        val disponivelTextView: TextView = viewBinding.disponivel
 
         init {
             viewBinding.iconExcluir.setOnClickListener {
@@ -58,6 +61,21 @@ class ListaSaboresAdapter(
             holder.nameTextView.text = saborPastel.nome
             "R$ %.2f".format(saborPastel.preco).also {
                 holder.precoTextView.text = it
+            }
+
+            val context = holder.disponivelTextView.context
+
+            if (saborPastel.disponivel) {
+                holder.disponivelTextView.setTextColor(
+                    ContextCompat.getColor(context, R.color.md_theme_tertiary)
+                )
+                holder.disponivelTextView.text = context.getString(R.string.disponivel).uppercase()
+            } else {
+                holder.disponivelTextView.setTextColor(
+                    ContextCompat.getColor(context, R.color.md_theme_error)
+                )
+                holder.disponivelTextView.text =
+                    context.getString(R.string.indisponivel).uppercase()
             }
         }
     }

@@ -13,4 +13,6 @@
     <string name="excluir">Excluir</string>
     <string name="editar">Editar</string>
     <string name="editar_sabor_de_pastel">Editar sabor de pastel</string>
+    <string name="adicionar_novo_sabor">Adicionar novo sabor</string>
+    <string name="indisponivel">Indisponível</string>
 </resources>
