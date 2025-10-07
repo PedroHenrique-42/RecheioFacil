@@ -30,7 +30,13 @@ class ListaSaboresAdapter(
             viewBinding.iconEditar.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     val item = getItem(adapterPosition)
-                    onSaborPastelClickListener.onEditSaborPastel(item)
+                    onSaborPastelClickListener.onEditSaborPastel(item.id)
+                }
+            }
+            viewBinding.root.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    val item = getItem(adapterPosition)
+                    onSaborPastelClickListener.onSaborPastelClick(item.id)
                 }
             }
         }

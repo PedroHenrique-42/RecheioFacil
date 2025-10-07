@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -29,7 +30,7 @@ class ListaSaboresFragment : Fragment(), OnSaborPastelClickListener {
         binding = FragmentListaSaboresBinding.inflate(inflater, container, false)
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_listaSaborzesFragment_to_cadastroSaborFragment)
+            findNavController().navigate(R.id.action_listaSaboresFragment_to_cadastroSaborFragment)
         }
 
         return binding.root
@@ -59,17 +60,23 @@ class ListaSaboresFragment : Fragment(), OnSaborPastelClickListener {
             }
         }
 
-        viewModel.getAllContacts()
+        viewModel.getAllSabores()
     }
 
-    override fun onSaborPastelClick(position: Int) {
-
+    override fun onSaborPastelClick(id: Int) {
+        Toast.makeText(this.context, "Clicando ${id}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDeleteSaborPastel(saborPastel: SaborPastel) {
         viewModel.delete(saborPastel)
     }
 
-    override fun onEditSaborPastel(saborPastel: SaborPastel) {
+    override fun onEditSaborPastel(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt("idSaborPastel", id)
+        findNavController().navigate(
+            R.id.action_listaSaboresFragment_to_edicaoSaborFragment,
+            bundle
+        )
     }
 }

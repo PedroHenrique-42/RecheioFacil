@@ -13,11 +13,14 @@ interface SaborPastelDAO {
     suspend fun insert(saborPastelEntity: SaborPastelEntity)
 
     @Update
-    suspend fun update (saborPastelEntity: SaborPastelEntity)
+    suspend fun update(saborPastelEntity: SaborPastelEntity)
 
     @Delete
     suspend fun delete(saborPastelEntity: SaborPastelEntity)
 
     @Query("SELECT * FROM recheios")
     fun getAll(): Flow<List<SaborPastelEntity>>
+
+    @Query("SELECT * FROM recheios WHERE id=:id")
+    fun getSaborById(id: Int): SaborPastelEntity
 }

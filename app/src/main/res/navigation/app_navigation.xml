@@ -11,12 +11,20 @@
         android:label="@string/sabores_de_pastel"
         tools:layout="@layout/fragment_lista_sabores">
         <action
-            android:id="@+id/action_listaSaborzesFragment_to_cadastroSaborFragment"
+            android:id="@+id/action_listaSaboresFragment_to_cadastroSaborFragment"
             app:destination="@id/cadastroSaborFragment" />
+        <action
+            android:id="@+id/action_listaSaboresFragment_to_edicaoSaborFragment"
+            app:destination="@id/edicaoSaborFragment" />
     </fragment>
     <fragment
         android:id="@+id/cadastroSaborFragment"
         android:name="br.com.pedroferezin.recheiofacil.ui.CadastroSaborFragment"
         android:label="@string/novo_sabor_de_pastel"
         tools:layout="@layout/fragment_cadastro_sabor" />
+    <fragment
+        android:id="@+id/edicaoSaborFragment"
+        android:name="br.com.pedroferezin.recheiofacil.ui.EdicaoSaborFragment"
+        android:label="@string/editar_sabor_de_pastel"
+        tools:layout="@layout/fragment_edicao_sabor" />
 </navigation>

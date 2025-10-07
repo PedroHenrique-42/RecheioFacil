@@ -11,4 +11,6 @@
     <string name="sabores_de_pastel">Sabores de pastel</string>
     <string name="novo_sabor_de_pastel">Novo sabor de pastel</string>
     <string name="excluir">Excluir</string>
+    <string name="editar">Editar</string>
+    <string name="editar_sabor_de_pastel">Editar sabor de pastel</string>
 </resources>

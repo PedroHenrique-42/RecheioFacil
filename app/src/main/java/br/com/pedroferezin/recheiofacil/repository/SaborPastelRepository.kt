@@ -3,6 +3,7 @@ package br.com.pedroferezin.recheiofacil.repository
 import br.com.pedroferezin.recheiofacil.data.SaborPastelDAO
 import br.com.pedroferezin.recheiofacil.domain.SaborPastel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 
 class SaborPastelRepository(private val saborPastelDAO: SaborPastelDAO) {
@@ -14,4 +15,6 @@ class SaborPastelRepository(private val saborPastelDAO: SaborPastelDAO) {
 
     fun getAll(): Flow<List<SaborPastel>> =
         saborPastelDAO.getAll().map { it.map { it.toDomain() } }
+
+    fun getSaborById(id: Int): SaborPastel = saborPastelDAO.getSaborById(id).toDomain()
 }

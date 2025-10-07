@@ -1,5 +1,6 @@
 package br.com.pedroferezin.recheiofacil.viewmodel
 
+import android.view.KeyEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -8,7 +9,9 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import br.com.pedroferezin.recheiofacil.RecheioFacilApplication
 import br.com.pedroferezin.recheiofacil.domain.SaborPastel
 import br.com.pedroferezin.recheiofacil.repository.SaborPastelRepository
+import br.com.pedroferezin.recheiofacil.viewmodel.states.BuscarSaborState
 import br.com.pedroferezin.recheiofacil.viewmodel.states.CadastroState
+import br.com.pedroferezin.recheiofacil.viewmodel.states.EdicaoState
 import br.com.pedroferezin.recheiofacil.viewmodel.states.ListaState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +21,12 @@ import kotlinx.coroutines.launch
 class SaborPastelViewModel(private val repository: SaborPastelRepository) : ViewModel() {
     private val _stateCadastro = MutableStateFlow<CadastroState>(CadastroState.Loading)
     val stateCadastro = _stateCadastro.asStateFlow()
+
+    private val _stateEdicao = MutableStateFlow<EdicaoState>(EdicaoState.Loading)
+    val stateEdicao = _stateEdicao.asStateFlow()
+    private val _stateBuscarSabor =
+        MutableStateFlow<BuscarSaborState>(value = BuscarSaborState.Loading)
+    val stateBuscarSabor = _stateBuscarSabor.asStateFlow()
 
     private val _stateList = MutableStateFlow<ListaState>(ListaState.Loading)
     val stateList = _stateList.asStateFlow()
@@ -29,13 +38,14 @@ class SaborPastelViewModel(private val repository: SaborPastelRepository) : View
 
     fun update(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
         repository.update(saborPastel)
+        _stateEdicao.value = EdicaoState.Success
     }
 
     fun delete(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(saborPastel)
     }
 
-    fun getAllContacts() {
+    fun getAllSabores() {
         viewModelScope.launch {
             repository.getAll().collect { result ->
                 if (result.isEmpty()) {
@@ -45,6 +55,11 @@ class SaborPastelViewModel(private val repository: SaborPastelRepository) : View
                 }
             }
         }
+    }
+
+    fun getSabor(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val sabor = repository.getSaborById(id)
+        _stateBuscarSabor.value = BuscarSaborState.Success(sabor)
     }
 
     companion object {
