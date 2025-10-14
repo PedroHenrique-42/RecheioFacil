@@ -57,7 +57,7 @@ class SaborPastelViewModel(private val repository: SaborPastelRepository) : View
         }
     }
 
-    fun getSabor(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun getSabor(id: Int) = viewModelScope.launch {
         val sabor = repository.getSaborById(id)
         _stateBuscarSabor.value = BuscarSaborState.Success(sabor)
     }
