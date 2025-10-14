@@ -16,5 +16,5 @@ class SaborPastelRepository(private val saborPastelDAO: SaborPastelDAO) {
     fun getAll(): Flow<List<SaborPastel>> =
         saborPastelDAO.getAll().map { it.map { it.toDomain() } }
 
-    fun getSaborById(id: Int): SaborPastel = saborPastelDAO.getSaborById(id).toDomain()
+    suspend fun getSaborById(id: Int): SaborPastel = saborPastelDAO.getSaborById(id).toDomain()
 }

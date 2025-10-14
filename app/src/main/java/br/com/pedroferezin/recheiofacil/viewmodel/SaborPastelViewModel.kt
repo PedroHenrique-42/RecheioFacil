@@ -31,17 +31,17 @@ class SaborPastelViewModel(private val repository: SaborPastelRepository) : View
     private val _stateList = MutableStateFlow<ListaState>(ListaState.Loading)
     val stateList = _stateList.asStateFlow()
 
-    fun insert(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(saborPastel: SaborPastel) = viewModelScope.launch {
         repository.insert(saborPastel)
         _stateCadastro.value = CadastroState.Success
     }
 
-    fun update(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(saborPastel: SaborPastel) = viewModelScope.launch {
         repository.update(saborPastel)
         _stateEdicao.value = EdicaoState.Success
     }
 
-    fun delete(saborPastel: SaborPastel) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(saborPastel: SaborPastel) = viewModelScope.launch {
         repository.delete(saborPastel)
     }
 

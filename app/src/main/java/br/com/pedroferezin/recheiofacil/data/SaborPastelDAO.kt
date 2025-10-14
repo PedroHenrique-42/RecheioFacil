@@ -22,5 +22,5 @@ interface SaborPastelDAO {
     fun getAll(): Flow<List<SaborPastelEntity>>
 
     @Query("SELECT * FROM recheios WHERE id=:id")
-    fun getSaborById(id: Int): SaborPastelEntity
+    suspend fun getSaborById(id: Int): SaborPastelEntity
 }
